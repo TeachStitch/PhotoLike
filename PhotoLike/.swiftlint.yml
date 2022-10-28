@@ -1,0 +1,153 @@
+# COMMAND LINE RULES: ./swiftlint rules
+# RULES URL: https://github.com/realm/SwiftLint/blob/master/Rules.md
+# RULES CONFIG URL: https://github.com/realm/SwiftLint/tree/master/Source/SwiftLintFramework/Rules/RuleConfigurations
+
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+    - ./*/R.generated.swift
+    - BuildTools
+    - Pods
+
+disabled_rules: # rule identifiers to exclude from running
+    
+    # Operators should be surrounded by a single whitespace when defining them.
+    - operator_whitespace
+    - closure_parameter_position
+    - prohibited_super_call
+
+opt_in_rules: # some rules are only opt-in
+    
+    # nil coalescing operator is only evaluated if the lhs is nil, coalescing operator with nil as rhs is redundant
+    - redundant_nil_coalescing
+    
+    - duplicate_imports
+    - contains_over_first_not_nil
+    - contains_over_filter_is_empty
+    - contains_over_filter_count
+    - contains_over_range_nil_comparison
+    
+    # Some methods should not call super
+    - prohibited_super_call
+    
+    # Some overridden methods should always call super
+    - overridden_super_call
+    
+    # Implicitly unwrapped optionals should be avoided when possible.
+    #NOTE: this option is questionable
+    - implicitly_unwrapped_optional
+    
+    # Force unwrapping should be avoided.
+    - force_unwrapping
+    - force_try
+    - force_cast
+
+    # Prefer to locate parameters with defaults toward the end of the parameter list.
+    - function_default_parameter_at_end
+    
+    # Prefer using .first(where:) over .filter { }.first in collections.
+    - first_where
+    
+    # Prefer checking isEmpty over comparing count to zero.
+    - empty_count
+    - empty_string
+    
+    # Closure expressions should have a single space inside each brace.
+    - closure_spacing
+    
+    # Closure end should have the same indentation as the line that started it.
+    - closure_end_indentation
+    
+    # Operators should be surrounded by a single whitespace when they are being used.
+    - operator_usage_whitespace
+    
+    # Explicitly calling .init() should be avoided.
+    - explicit_init
+    
+    # Function parameters should be aligned vertically if they're in multiple lines in a method call.
+    - vertical_parameter_alignment_on_call
+    
+    # Modifier order should be consistent.
+    - modifier_order
+    
+    # Arguments should be either on the same line, or one per line.
+    - multiline_arguments
+    
+    # Multiline literals should have their surrounding brackets in a new line.
+    - multiline_literal_brackets
+    
+    # Functions and methods parameters should be either on the same line, or one per line.
+    - multiline_parameters
+    
+    # Prefer not to use extension access modifiers
+    - no_extension_access_modifier
+    
+    # Parentheses are not needed when declaring closure arguments.
+    - unneeded_parentheses_in_closure_argument
+    
+    # When declaring properties in protocols, the order of accessors should be `get set`.
+    - protocol_property_accessors_order
+    
+    - class_delegate_protocol
+    - weak_delegate
+    - private_over_fileprivate
+    
+    #style
+    - comma
+    - todo
+    - no_space_in_method_call
+    - return_arrow_whitespace
+    - closing_brace
+    - trailing_semicolon
+    - colon
+    - unused_declaration
+    - literal_expression_end_indentation
+
+
+# configurations
+trailing_whitespace:
+    ignores_empty_lines: true
+
+# Types should be nested at most 1 level deep, and statements should be nested at most 5 levels deep.
+nesting:
+    type_level: 5
+    
+line_length:
+    warning: 200
+    error: 300
+    ignores_function_declarations: true
+    ignores_urls: true
+
+function_parameter_count:
+    warning: 8
+
+function_body_length:
+    warning: 60
+
+identifier_name:
+    min_length: 1
+
+file_length:
+    warning: 500
+    error: 800
+
+cyclomatic_complexity:
+    warning: 14
+    ignores_case_statements: true
+
+# binary rules can set their severity level
+empty_count:
+  severity: warning
+
+force_cast: error # implicitly
+force_try: error
+force_unwrapping: error
+
+force_try:
+  severity: error # explicitly
+
+large_tuple:
+    warning: 4
+    error: 5
+
+type_name:
+    max_length:
+        warning: 50
